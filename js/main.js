@@ -205,8 +205,15 @@
 		dropdown();
 		goToTop();
 		loaderPage();
-		counterWayPoint();
-	});
+                counterWayPoint();
+
+                $('#discountForm').on('submit', function(e){
+                        e.preventDefault();
+                        alert('¡Gracias! Revisaremos tu solicitud de descuento.');
+                        $('#discountModal').modal('hide');
+                        this.reset();
+                });
+        });
 
 
 }());

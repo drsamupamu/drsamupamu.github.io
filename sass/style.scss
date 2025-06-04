@@ -887,7 +887,7 @@ h1, h2, h3, h4, h5, h6, figure {
 	// border-bottom: 1px solid rgba($brand-black,.09);
 	padding-top: 10em;
 	clear: both;
-	@media screen and(max-width: $screen-sm){
+	@media screen and (max-width: $screen-sm){
 		padding-top: 3em;
 		padding-bottom: 0em;
 	}
@@ -905,7 +905,7 @@ h1, h2, h3, h4, h5, h6, figure {
 		float: left;
 	}
 	.col-half-image-holder{
-		@media screen and(max-width: $screen-sm){
+		@media screen and (max-width: $screen-sm){
 			display: block;
 			position: absolute;
 			bottom: 0;
@@ -953,7 +953,7 @@ h1, h2, h3, h4, h5, h6, figure {
 				}
 			}
 		}
-		@media screen and(max-width: $screen-sm){
+		@media screen and (max-width: $screen-sm){
 			width: 100%;
 			text-align: center;
 			.desc{
@@ -1077,7 +1077,7 @@ h1, h2, h3, h4, h5, h6, figure {
 	padding-right: 10px;
 	float: left;
 	padding: 7em 0;
-	@media screen and(max-width: $screen-sm){
+	@media screen and (max-width: $screen-sm){
 		padding: 3em 0;
 	}
 	.col-half{
@@ -1085,7 +1085,7 @@ h1, h2, h3, h4, h5, h6, figure {
 		float: left;
 		padding-left: 10px;
 		padding-right: 10px;
-		@media screen and(max-width: $screen-xs){
+		@media screen and (max-width: $screen-xs){
 			width: 100%;		
 		}
 		.project,.project-grid{
@@ -1115,7 +1115,7 @@ h1, h2, h3, h4, h5, h6, figure {
 					bottom: 0;
 				}
 			}
-			@media screen and(max-width: $screen-xs){
+			@media screen and (max-width: $screen-xs){
 				height: 340px !important;
 				margin-bottom: 20px;	
 			}
@@ -1335,7 +1335,7 @@ h1, h2, h3, h4, h5, h6, figure {
 	display: none;
 	@include translateX(270px);
 	@include transition(.5s);
-	@media screen and(max-width: $screen-sm){
+	@media screen and (max-width: $screen-sm){
 		display: block;
 	}
 	.offcanvas & {
@@ -1624,22 +1624,32 @@ h1, h2, h3, h4, h5, h6, figure {
 	}
 }
 .btn-danger {
-	background: $brand-danger;
-	color: $brand-white;
-	border: 2px solid $brand-danger;
-	&:hover, &:focus, &:active {
-		background: darken($brand-danger, 5%)!important;
-		border-color: darken($brand-danger, 5%)!important;
-	}
-	&.btn-outline {
-		background: transparent;
-		color: $brand-danger;
-		border: 2px solid $brand-danger;
-		&:hover, &:focus, &:active {
-			background: $brand-danger;
-			color: $brand-white;
-		}
-	}
+        background: $brand-danger;
+        color: $brand-white;
+        border: 2px solid $brand-danger;
+        &:hover, &:focus, &:active {
+                background: darken($brand-danger, 5%)!important;
+                border-color: darken($brand-danger, 5%)!important;
+        }
+        &.btn-outline {
+                background: transparent;
+                color: $brand-danger;
+                border: 2px solid $brand-danger;
+                &:hover, &:focus, &:active {
+                        background: $brand-danger;
+                        color: $brand-white;
+                }
+        }
+}
+
+.btn-discount {
+        background: $brand-secondary;
+        color: $brand-white;
+        border: 2px solid $brand-secondary;
+        &:hover, &:focus, &:active {
+                background: darken($brand-secondary, 7%)!important;
+                border-color: darken($brand-secondary, 7%)!important;
+        }
 }
 
 .btn-outline {

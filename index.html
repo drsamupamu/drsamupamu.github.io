@@ -89,6 +89,14 @@
                   class="btn btn-default btn-outline popup-vimeo"
                   >Simula tu presupuesto</a
                 >
+                <button
+                  type="button"
+                  class="btn btn-discount"
+                  data-toggle="modal"
+                  data-target="#discountModal"
+                >
+                  ¿Tu proyecto aplica para descuento?
+                </button>
               </p>
             </div>
           </div>
@@ -510,6 +518,84 @@
                 <button type="submit" class="btn btn-primary">
                   Enviar Cotización
                 </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Descuento -->
+      <div
+        class="modal fade"
+        id="discountModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="discountModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="discountModalLabel">
+                Solicita un Descuento
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Cerrar"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form id="discountForm">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="discountIdea">Descripción de tu idea</label>
+                  <textarea
+                    class="form-control"
+                    id="discountIdea"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="discountName">Nombre</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="discountName"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="discountEmail">Correo electrónico</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="discountEmail"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="discountPhone">Teléfono</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="discountPhone"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+                <button type="submit" class="btn btn-discount">Enviar</button>
               </div>
             </form>
           </div>

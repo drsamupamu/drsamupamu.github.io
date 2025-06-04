@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="400"
+  height="60"
+  viewBox="0 0 400 60"
+>
+  <!-- 
+    Vector logo for "Hecho en Código" — combinada en una sola línea.
+    Símbolo de código (</>) a la izquierda y texto a la derecha.
+  -->
+
+  <!-- Definimos un grupo para el símbolo “</>” -->
+  <g id="codigo-icono" transform="translate(0, 5)">
+    <!-- Corchete izquierdo “<” -->
+    <polygon
+      points="10,10 0,20 10,30 14,26 7,20 14,14"
+      fill="#0C9CEE"
+    />
+    <!-- Barra diagonal “/” -->
+    <rect
+      x="20"
+      y="10"
+      width="4"
+      height="28"
+      transform="rotate(45 22 24)"
+      fill="#0C9CEE"
+    />
+    <!-- Corchete derecho “>” -->
+    <polygon
+      points="34,10 30,14 37,20 30,26 34,30 44,20"
+      fill="#0C9CEE"
+    />
+  </g>
+
+  <!-- Grupo para el texto “Hecho en Código” -->
+  <g id="texto-logo" transform="translate(60, 40)">
+    <!-- “Hecho en Código” en una sola línea -->
+    <text
+      x="0"
+      y="0"
+      font-family="Work Sans, Arial, sans-serif"
+      font-weight="400"
+      font-size="24"
+      fill="#1B1D20"
+    >
+      Hecho en Código
+    </text>
+  </g>
+</svg>

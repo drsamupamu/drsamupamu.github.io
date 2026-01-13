@@ -299,36 +299,108 @@ document.addEventListener('DOMContentLoaded', function () {
     `;
     document.head.appendChild(style);
 
-    // ===== FORM HANDLING =====
+    // ===== FORM HANDLING - SUPABASE EDGE FUNCTION =====
     const demoForm = document.getElementById('demo-form');
 
+    // Configuración de Supabase Edge Function
+    const EDGE_FUNCTION_URL = 'https://mygedtunsydglrrbjuhd.supabase.co/functions/v1/receive-lead';
+
     if (demoForm) {
-        demoForm.addEventListener('submit', function (e) {
+        demoForm.addEventListener('submit', async function (e) {
             e.preventDefault();
 
-            // Get form data
-            const formData = new FormData(demoForm);
-            const data = Object.fromEntries(formData.entries());
-
-            // Here you would normally send the data to your server
-            console.log('Form submitted:', data);
-
-            // Show success message (you can customize this)
             const button = demoForm.querySelector('button[type="submit"]');
             const originalText = button.innerHTML;
 
-            button.innerHTML = '<i class="fas fa-check"></i> ¡Solicitud Enviada!';
-            button.style.background = 'linear-gradient(135deg, #22C55E, #16A34A)';
+            // Estado de carga
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
             button.disabled = true;
 
-            // Reset after 3 seconds
-            setTimeout(() => {
-                button.innerHTML = originalText;
-                button.style.background = '';
-                button.disabled = false;
-                demoForm.reset();
-            }, 3000);
+            try {
+                // Obtener datos del formulario
+                const formData = new FormData(demoForm);
+                const data = {
+                    nombre: formData.get('nombre'),
+                    empresa: formData.get('empresa'),
+                    email: formData.get('email'),
+                    telefono: formData.get('telefono'),
+                    propiedades: formData.get('propiedades'),
+                    mensaje: formData.get('mensaje') || null
+                };
+
+                // Enviar a Edge Function (guarda en BD + envía email)
+                const response = await fetch(EDGE_FUNCTION_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (!response.ok || !result.success) {
+                    throw new Error(result.error || 'Error al enviar la solicitud');
+                }
+
+                // Éxito
+                button.innerHTML = '<i class="fas fa-check"></i> ¡Solicitud Enviada!';
+                button.style.background = 'linear-gradient(135deg, #22C55E, #16A34A)';
+
+                // Mostrar mensaje de éxito más visible
+                showNotification('¡Gracias! Te contactaremos en menos de 24 horas.', 'success');
+
+                // Reset después de 3 segundos
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                    button.disabled = false;
+                    demoForm.reset();
+                }, 3000);
+
+            } catch (error) {
+                console.error('Error enviando formulario:', error);
+
+                // Estado de error
+                button.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error al enviar';
+                button.style.background = 'linear-gradient(135deg, #EF4444, #DC2626)';
+
+                showNotification('Hubo un problema al enviar. Por favor intenta de nuevo.', 'error');
+
+                // Reset después de 3 segundos
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                    button.disabled = false;
+                }, 3000);
+            }
         });
+    }
+
+    // Función para mostrar notificaciones
+    function showNotification(message, type = 'success') {
+        // Remover notificación existente si hay
+        const existing = document.querySelector('.form-notification');
+        if (existing) existing.remove();
+
+        const notification = document.createElement('div');
+        notification.className = `form-notification form-notification--${type}`;
+        notification.innerHTML = `
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+            <span>${message}</span>
+        `;
+
+        // Insertar después del formulario
+        const form = document.getElementById('demo-form');
+        if (form) {
+            form.insertAdjacentElement('afterend', notification);
+
+            // Auto-remover después de 5 segundos
+            setTimeout(() => {
+                notification.classList.add('form-notification--hide');
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
     }
 
     // ===== NEWSLETTER FORM =====

@@ -328,7 +328,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     mensaje: formData.get('mensaje') || null
                 };
 
+                console.log('Form submitted:', data);
+
                 // Enviar a Edge Function (guarda en BD + envía email)
+                console.log('Sending to:', EDGE_FUNCTION_URL);
                 const response = await fetch(EDGE_FUNCTION_URL, {
                     method: 'POST',
                     headers: {
@@ -337,7 +340,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     body: JSON.stringify(data)
                 });
 
+                console.log('Response status:', response.status);
                 const result = await response.json();
+                console.log('Response data:', result);
 
                 if (!response.ok || !result.success) {
                     throw new Error(result.error || 'Error al enviar la solicitud');

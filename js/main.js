@@ -1,16 +1,16 @@
 // ===== RENTAPAC - Main JavaScript =====
 
-document.addEventListener('DOMContentLoaded', function() {
-    
+document.addEventListener('DOMContentLoaded', function () {
+
     // ===== PRELOADER =====
     const preloader = document.querySelector('.preloader');
-    
-    window.addEventListener('load', function() {
+
+    window.addEventListener('load', function () {
         setTimeout(() => {
             preloader.classList.add('hidden');
         }, 500);
     });
-    
+
     // Fallback - hide preloader after 3 seconds max
     setTimeout(() => {
         if (preloader && !preloader.classList.contains('hidden')) {
@@ -22,15 +22,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const header = document.querySelector('.header');
     let lastScroll = 0;
 
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         const currentScroll = window.pageYOffset;
-        
+
         if (currentScroll > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
-        
+
         lastScroll = currentScroll;
     });
 
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.nav__link');
 
     if (navToggle) {
-        navToggle.addEventListener('click', function() {
+        navToggle.addEventListener('click', function () {
             navToggle.classList.toggle('active');
             navMenu.classList.toggle('active');
             document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Close menu when clicking a link
     navLinks.forEach(link => {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function () {
             navToggle.classList.remove('active');
             navMenu.classList.remove('active');
             document.body.style.overflow = '';
@@ -61,13 +61,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateActiveLink() {
         const scrollPos = window.scrollY + 200;
-        
+
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
             const sectionId = section.getAttribute('id');
             const navLink = document.querySelector(`.nav__link[href="#${sectionId}"]`);
-            
+
             if (navLink) {
                 if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
                     navLinks.forEach(link => link.classList.remove('active'));
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ===== SMOOTH SCROLL =====
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
             if (href !== '#') {
                 e.preventDefault();
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (target) {
                     const headerHeight = header.offsetHeight;
                     const targetPosition = target.offsetTop - headerHeight;
-                    
+
                     window.scrollTo({
                         top: targetPosition,
                         behavior: 'smooth'
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ===== BACK TO TOP BUTTON =====
     const backToTop = document.querySelector('.back-to-top');
 
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         if (window.pageYOffset > 500) {
             backToTop.classList.add('visible');
         } else {
@@ -115,25 +115,25 @@ document.addEventListener('DOMContentLoaded', function() {
         particlesJS('particles-js', {
             particles: {
                 number: {
-                    value: 60,
+                    value: 45,
                     density: {
                         enable: true,
-                        value_area: 800
+                        value_area: 900
                     }
                 },
                 color: {
-                    value: ['#3B82F6', '#10B981', '#8B5CF6']
+                    value: ['#6366F1', '#A855F7', '#818CF8']
                 },
                 shape: {
                     type: 'circle'
                 },
                 opacity: {
-                    value: 0.3,
+                    value: 0.2,
                     random: true,
                     anim: {
                         enable: true,
-                        speed: 1,
-                        opacity_min: 0.1,
+                        speed: 0.6,
+                        opacity_min: 0.08,
                         sync: false
                     }
                 },
@@ -150,13 +150,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 line_linked: {
                     enable: true,
                     distance: 150,
-                    color: '#3B82F6',
-                    opacity: 0.15,
+                    color: '#6366F1',
+                    opacity: 0.08,
                     width: 1
                 },
                 move: {
                     enable: true,
-                    speed: 1.5,
+                    speed: 0.8,
                     direction: 'none',
                     random: true,
                     straight: false,
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Trigger counter animation when metrics section is in view
     const metricsSection = document.getElementById('metricas');
-    
+
     if (metricsSection) {
         const observerOptions = {
             root: null,
@@ -246,13 +246,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const demoPanels = document.querySelectorAll('.demo__panel');
 
     demoTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
+        tab.addEventListener('click', function () {
             const targetTab = this.getAttribute('data-tab');
-            
+
             // Remove active from all tabs and panels
             demoTabs.forEach(t => t.classList.remove('active'));
             demoPanels.forEach(p => p.classList.remove('active'));
-            
+
             // Add active to clicked tab and corresponding panel
             this.classList.add('active');
             const targetPanel = document.getElementById(`panel-${targetTab}`);
@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        
+
         animationObserver.observe(el);
     });
 
@@ -301,26 +301,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ===== FORM HANDLING =====
     const demoForm = document.getElementById('demo-form');
-    
+
     if (demoForm) {
-        demoForm.addEventListener('submit', function(e) {
+        demoForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             // Get form data
             const formData = new FormData(demoForm);
             const data = Object.fromEntries(formData.entries());
-            
+
             // Here you would normally send the data to your server
             console.log('Form submitted:', data);
-            
+
             // Show success message (you can customize this)
             const button = demoForm.querySelector('button[type="submit"]');
             const originalText = button.innerHTML;
-            
+
             button.innerHTML = '<i class="fas fa-check"></i> ¡Solicitud Enviada!';
-            button.style.background = 'linear-gradient(135deg, #10B981, #059669)';
+            button.style.background = 'linear-gradient(135deg, #22C55E, #16A34A)';
             button.disabled = true;
-            
+
             // Reset after 3 seconds
             setTimeout(() => {
                 button.innerHTML = originalText;
@@ -333,19 +333,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ===== NEWSLETTER FORM =====
     const newsletterForms = document.querySelectorAll('.newsletter-form');
-    
+
     newsletterForms.forEach(form => {
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const input = form.querySelector('input[type="email"]');
             const button = form.querySelector('button');
-            
+
             if (input.value) {
                 const originalIcon = button.innerHTML;
                 button.innerHTML = '<i class="fas fa-check"></i>';
                 input.value = '';
-                
+
                 setTimeout(() => {
                     button.innerHTML = originalIcon;
                 }, 2000);
@@ -355,7 +355,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ===== TYPING EFFECT (if hero has typing text) =====
     const typingText = document.querySelector('.typing-text');
-    
+
     if (typingText) {
         const phrases = [
             'a medida',
@@ -363,7 +363,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'profesionales',
             'escalables'
         ];
-        
+
         let phraseIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -371,7 +371,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function type() {
             const currentPhrase = phrases[phraseIndex];
-            
+
             if (isDeleting) {
                 typingText.textContent = currentPhrase.substring(0, charIndex - 1);
                 charIndex--;
